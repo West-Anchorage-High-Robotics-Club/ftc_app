@@ -73,7 +73,6 @@ public class FtcOpModeRegister implements OpModeRegister {
          * Register OpModes that use the annotation-based registration mechanism.
          */
         AnnotatedOpModeRegistrar.register(manager);
-        //hello world v2
 
         /**
          * Any manual OpMode class registrations should go here.

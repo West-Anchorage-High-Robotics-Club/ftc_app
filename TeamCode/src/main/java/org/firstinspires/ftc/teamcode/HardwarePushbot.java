@@ -24,8 +24,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HardwarePushbot
 {
     /* Public OpMode members. */
-    public DcMotor  leftMotor   = 0;
-    public DcMotor  rightMotor  = 2;
+    public DcMotor  leftMotor   = null;
+    public DcMotor  rightMotor  = null;
     public DcMotor  armMotor    = null;
     public Servo    leftClaw    = null;
     public Servo    rightClaw   = null;

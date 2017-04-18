@@ -54,7 +54,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Pushbot: TestOPMode", group="Pushbot")
+@TeleOp(name="Pushbot: LeeroyMode", group="Pushbot")
 //@Disabled
 public class PushbotTeleopTank_Iterative extends OpMode{
 
@@ -119,8 +119,16 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
 
         // Use gamepad buttons to move the arm up (Y) and down (A)
-        if (gamepad1.y)
-            robot.armMotor.setPower(robot.ARM_UP_POWER);
+        if (gamepad1.y) {
+            robot.armMotor.setTargetPosition(3000);
+            int x;
+            x = robot.armMotor.getCurrentPosition();
+            if (x != 3000) {
+                robot.armMotor.setPower(robot.ARM_UP_POWER);
+            }
+            else
+                robot.armMotor.setPower(0.0);
+        }
         else if (gamepad1.a)
             robot.armMotor.setPower(robot.ARM_DOWN_POWER);
         else

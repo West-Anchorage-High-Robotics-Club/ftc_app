@@ -64,7 +64,7 @@ public class HardwarePushbot
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER)/*_USING_*/;
 
         // Define and initialize ALL installed servos.
         leftClaw = hwMap.servo.get("left_hand");

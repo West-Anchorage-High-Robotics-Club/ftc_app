@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 /**
  * Created by whs on 1/17/17. Update 8/29 - Working on program for omnibot
  */
-@TeleOp(name="OmniBot", group="HardwareOmniBot")
-public class OmniBot extends OpMode {
+@TeleOp(name="CrushBot", group="HardwareCrushBot")
+public class CrushBot extends OpMode {
 
     private float W, V, X, Y, count;
     public DcMotor rightMotor,leftMotor, armRight, armLeft = null;

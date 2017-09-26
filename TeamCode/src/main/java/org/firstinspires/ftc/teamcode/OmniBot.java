@@ -12,9 +12,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class OmniBot extends OpMode {
 
     private float W, V, X, Y, count;
-    public DcMotor rightMotor = null;
-    public DcMotor leftMotor = null;
-    public Servo door22 = null;
+    public DcMotor rightMotor,leftMotor, armRight, armLeft = null;
+
+    public Servo servo1, servo2, servo3 = null;
 
     float leftY = -gamepad1.left_stick_y;
     float rightY = -gamepad1.right_stick_y;
@@ -26,7 +26,6 @@ public class OmniBot extends OpMode {
 
     @Override
     public void loop() {
-
         leftMotor.setPower(leftY);
         rightMotor.setPower(rightY);
     }
@@ -34,7 +33,7 @@ public class OmniBot extends OpMode {
 
 
 
-    /**
+    /*
      * This function is executed when this Op Mode is selected from the Driver Station.
      */
 

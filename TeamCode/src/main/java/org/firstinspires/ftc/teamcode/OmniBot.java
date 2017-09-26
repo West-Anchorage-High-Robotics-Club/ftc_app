@@ -14,7 +14,7 @@ public class OmniBot extends OpMode {
     private float W, V, X, Y, count;
     public DcMotor rightMotor,leftMotor, armRight, armLeft = null;
 
-    public Servo servo1, servo2, servo3 = null;
+    public Servo servo1, servoD, servoP = null;
 
     float leftY = -gamepad1.left_stick_y;
     float rightY = -gamepad1.right_stick_y;

@@ -11,7 +11,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name="CrushBot", group="HardwareCrushBot")
 public class CrushBot extends OpMode {
 
-    private float W, V, X, Y, count;
     public DcMotor rightMotor,leftMotor, armRight, armLeft = null;
 
     float leftY = -gamepad1.left_stick_y;
@@ -26,10 +25,11 @@ public class CrushBot extends OpMode {
     public void loop() {
         leftMotor.setPower(leftY);
         rightMotor.setPower(rightY);
+
+        armRight.setTargetPosition(-280);
+        armLeft.setTargetPosition(280); //280 should be 90 degrees https://ftcforum.usfirst.org/forum/ftc-technology/android-studio/6654-neverest-40-encoders-value-as-degree
     }
 }
-
-
 
     /*
      * This function is executed when this Op Mode is selected from the Driver Station.

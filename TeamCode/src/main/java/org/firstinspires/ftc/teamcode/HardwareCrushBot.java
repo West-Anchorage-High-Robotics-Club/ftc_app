@@ -28,9 +28,7 @@ public class HardwareCrushBot
     public DcMotor  centralMotor    = null;
     //public Servo door = null; THis is how you programify servos
 
-    public static final double MID_SERVO       =  0.5 ;
-    public static final double ARM_UP_POWER    =  0.45 ;
-    public static final double ARM_DOWN_POWER  = -0.45 ;
+    // public static final double MID_SERVO       =  0.5 ;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -49,21 +47,18 @@ public class HardwareCrushBot
         // Define and Initialize Motors
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
-        boot    = hwMap.dcMotor.get("boot_kick");
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
 
         // Set all motors to zero power
         leftMotor.setPower(0);
         rightMotor.setPower(0);
-        boot.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         // RUN_WITHOUT_ENCODER
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        boot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Define and initialize ALL installed servos.
         door = hwMap.servo.get("door_kick");

@@ -26,8 +26,8 @@ public class CrushBot extends OpMode {
         leftMotor.setPower(leftY);
         rightMotor.setPower(rightY);
 
-        armRight.setTargetPosition(-280);
-        armLeft.setTargetPosition(280); //280 should be 90 degrees https://ftcforum.usfirst.org/forum/ftc-technology/android-studio/6654-neverest-40-encoders-value-as-degree
+       // armRight.setTargetPosition(-280);
+       // armLeft.setTargetPosition(280); //280 should be 90 degrees https://ftcforum.usfirst.org/forum/ftc-technology/android-studio/6654-neverest-40-encoders-value-as-degree
     }
 }
 

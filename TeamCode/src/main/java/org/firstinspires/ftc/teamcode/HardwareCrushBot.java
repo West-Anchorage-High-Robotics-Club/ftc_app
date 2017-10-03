@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -24,8 +24,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HardwareCrushBot
 {
     /* Public OpMode members. */
-    public DcMotor  rotateMotor  = null;
-    public DcMotor  centralMotor    = null;
+    public DcMotor rightMotor,leftMotor, armRight, armLeft = null;
     //public Servo door = null; THis is how you programify servos
 
     // public static final double MID_SERVO       =  0.5 ;
@@ -47,6 +46,9 @@ public class HardwareCrushBot
         // Define and Initialize Motors
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
+        armLeft = hwMap.dcMotor.get("armLeft");
+        armRight = hwMap.dcMotor.get("armRight");
+        armRight.setDirection(DcMotor.Direction.REVERSE);
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
 
@@ -57,8 +59,8 @@ public class HardwareCrushBot
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         // RUN_WITHOUT_ENCODER
-        leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
         door = hwMap.servo.get("door_kick");

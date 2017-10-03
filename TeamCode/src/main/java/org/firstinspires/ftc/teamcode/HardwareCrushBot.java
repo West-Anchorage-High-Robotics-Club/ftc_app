@@ -24,8 +24,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HardwareCrushBot
 {
     /* Public OpMode members. */
-    public DcMotor  rotateMotor  = null;
-    public DcMotor  centralMotor    = null;
+    public DcMotor  rightMotor,leftMotor, armRight, armLeft  = null;
     //public Servo door = null; THis is how you programify servos
 
     // public static final double MID_SERVO       =  0.5 ;

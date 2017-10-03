@@ -3,10 +3,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 /**
- * Created by whs on 1/17/17. Update 8/29 - Working on program for omnibot
+ * Created by whs on 1/17/17. Update 8/29 - Working on program for crushbot
  */
 @TeleOp(name="CrushBot", group="HardwareCrushBot")
 public class CrushBot extends OpMode {
@@ -19,6 +20,20 @@ public class CrushBot extends OpMode {
     @Override
     public void init() {
 
+        armRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        armRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        armLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
     @Override
@@ -26,8 +41,20 @@ public class CrushBot extends OpMode {
         leftMotor.setPower(leftY);
         rightMotor.setPower(rightY);
 
-       // armRight.setTargetPosition(-280);
-       // armLeft.setTargetPosition(280); //280 should be 90 degrees https://ftcforum.usfirst.org/forum/ftc-technology/android-studio/6654-neverest-40-encoders-value-as-degree
+        if(gamepad1.left_bumper){
+            armLeft.setTargetPosition(280); //280 should be 90 degrees https://ftcforum.usfirst.org/forum/ftc-technology/android-studio/6654-neverest-40-encoders-value-as-degree
+            armLeft.setPower(0.6);
+        } else {
+            armLeft.setTargetPosition(0);
+            armLeft.setPower(0.6);
+        }
+        if(gamepad1.right_bumper){
+            armRight.setTargetPosition(-280);
+            armRight.setPower(0.6);
+        } else {
+            armRight.setTargetPosition(0);
+            armRight.setPower(0.6);
+        }
     }
 }
 

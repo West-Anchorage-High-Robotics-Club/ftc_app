@@ -15,17 +15,20 @@ public class CheeseBot extends OpMode {
     public DcMotor rightMotor = null;
     public DcMotor leftMotor = null;
 
-    float leftY = -gamepad1.left_stick_y;
-    float rightY = -gamepad1.right_stick_y;
+    float leftY = gamepad1.left_stick_y;
+    float rightY = gamepad1.right_stick_y;
 
     @Override
     public void init() {
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     @Override
     public void loop() {
-
         leftMotor.setPower(leftY);
         rightMotor.setPower(rightY);
     }

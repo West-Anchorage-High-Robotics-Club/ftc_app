@@ -105,8 +105,8 @@ public class PushbotTeleopTank_Iterative extends OpMode{
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         left = -gamepad1.left_stick_y;
         right = -gamepad1.right_stick_y;
-        robot.leftMotor.setPower(left);
-        robot.rightMotor.setPower(right);
+        //error robot.leftMotor.setPower(left);
+        //error robot.rightMotor.setPower(right);
 
         // Use gamepad left & right Bumpers to open and close the claw
         if (gamepad1.right_bumper)
@@ -121,7 +121,7 @@ public class PushbotTeleopTank_Iterative extends OpMode{
 
         // Use gamepad buttons to move the arm up (Y) and down (A)
         if (gamepad1.y) {
-            robot.armMotor.setPower(robot.ARM_UP_POWER);
+            //error robot.armMotor.setPower(robot.ARM_UP_POWER);
 
            /* robot.armMotor.setTargetPosition(3000);
             int x;
@@ -134,17 +134,17 @@ public class PushbotTeleopTank_Iterative extends OpMode{
                 */
         }
         else if (gamepad1.a) {
-            robot.armMotor.setPower(robot.ARM_DOWN_POWER);
+            //error robot.armMotor.setPower(robot.ARM_DOWN_POWER);
         }
             else {
-            robot.armMotor.setPower(0.0);
+            //error robot.armMotor.setPower(0.0);
         }
 
         // Send telemetry message to signify robot running;
         telemetry.addData("claw",  "Offset = %.2f", clawOffset);
         telemetry.addData("left",  "%.2f", left);
         telemetry.addData("right", "%.2f", right);
-        telemetry.addData("ArmEncoder", "%.2f", robot.armMotor.getCurrentPosition());
+        //error telemetry.addData("ArmEncoder", "%.2f", robot.armMotor.getCurrentPosition());
     }
 
     /*

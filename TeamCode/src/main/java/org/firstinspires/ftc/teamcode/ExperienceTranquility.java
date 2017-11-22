@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by whs on 1/17/17.
  */
 @TeleOp(name="ExperienceTranquility", group="HardwareZenyatta")
+@Disabled
 public class ExperienceTranquility extends OpMode {
 
     private float W, V, X, Y, count;

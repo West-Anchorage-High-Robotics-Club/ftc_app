@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.Servo;
+
 
 /**
  * This is NOT an opmode.
@@ -24,7 +26,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HardwareCrushBot
 {
     /* Public OpMode members. */
-    public DcMotor rightMotor,leftMotor, armRight, armLeft = null;
+    public DcMotor rightMotor,leftMotor, armRight, armLeft, door = null;
+
     //public Servo door = null; THis is how you programify servos
 
     // public static final double MID_SERVO       =  0.5 ;
@@ -63,8 +66,8 @@ public class HardwareCrushBot
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-        door = hwMap.servo.get("door_kick");
-        door.setPosition(MID_SERVO);
+        //door = hwMap.servo.get("door_kick");
+        //door.setPosition(MID_SERVO);
     }
 
     /***

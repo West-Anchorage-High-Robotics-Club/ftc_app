@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -10,6 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by whs on 1/17/17. Update 8/29 - Working on program for crushbot
  */
 @TeleOp(name="CrushBot", group="HardwareCrushBot")
+@Disabled
 public class CrushBot extends OpMode {
 
     public DcMotor rightMotor,leftMotor, armRight, armLeft = null;

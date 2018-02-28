@@ -6,12 +6,16 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.I2cAddr;
+import com.qualcomm.robotcore.hardware.I2cDevice;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
 
 /**
  * Created by whs on 11/21/17.
  */
-@TeleOp(name="Ham Bot", group="Ham Bot")
-public class HamBot extends OpMode {
+@TeleOp(name="Ham Bot Range Adv", group="Ham Bot")
+public class HamBotRangeAdv extends OpMode {
 
     private float W, V, X, Y, count;
     private ElapsedTime runtime = new ElapsedTime();
@@ -21,6 +25,16 @@ public class HamBot extends OpMode {
     static final double MIN_POS     =  0.0;     // Minimum rotational position
     Servo servo;
     // double  position = (MAX_POS - MIN_POS) / 2; // Start at halfway position
+    byte[] range1Cache; //The read will return an array of bytes. They are stored in this variable
+
+    I2cAddr RANGE1ADDRESS = new I2cAddr(0x14); //Default I2C address for MR Range (7-bit)
+    public static final int RANGE1_REG_START = 0x04; //Register to start reading
+    public static final int RANGE1_READ_LENGTH = 2; //Number of byte to read
+
+    public I2cDevice RANGE1;
+    public I2cDeviceSynch RANGE1Reader;
+
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -39,6 +53,10 @@ public class HamBot extends OpMode {
         // Reverse the motor that runs backwards when connected directly to the battery
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
+
+        RANGE1 = hardwareMap.i2cDevice.get("range");
+        RANGE1Reader = new I2cDeviceSynchImpl(RANGE1, RANGE1ADDRESS, false);
+        RANGE1Reader.engage();
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -97,6 +115,9 @@ public class HamBot extends OpMode {
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
         telemetry.addData("right_Hand : ", servo.getPosition());
+        range1Cache = RANGE1Reader.read(RANGE1_REG_START, RANGE1_READ_LENGTH);
+        telemetry.addData("Ultra Sonic", range1Cache[0] & 0xFF);
+        telemetry.addData("ODS", range1Cache[1] & 0xFF);
     }
 
     /*

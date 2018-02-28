@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,11 +8,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 /**
  * Created by whs on 11/21/17.
  */
-@TeleOp(name="Ham Bot", group="Ham Bot")
-public class HamBot extends OpMode {
+@TeleOp(name="Ham Bot Range ", group="Ham Bot")
+public class HamBotRange extends OpMode {
 
     private float W, V, X, Y, count;
     private ElapsedTime runtime = new ElapsedTime();
@@ -21,6 +24,8 @@ public class HamBot extends OpMode {
     static final double MIN_POS     =  0.0;     // Minimum rotational position
     Servo servo;
     // double  position = (MAX_POS - MIN_POS) / 2; // Start at halfway position
+    ModernRoboticsI2cRangeSensor rangeSensor;
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -34,6 +39,8 @@ public class HamBot extends OpMode {
         leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
         servo = hardwareMap.get(Servo.class, "right_hand");
+        rangeSensor = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "range");
+
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -97,6 +104,14 @@ public class HamBot extends OpMode {
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
         telemetry.addData("right_Hand : ", servo.getPosition());
+        telemetry.addData("raw ultrasonic", rangeSensor.rawUltrasonic());
+        telemetry.addData("raw optical", rangeSensor.rawOptical());
+        telemetry.addData("cm optical", "%.2f cm", rangeSensor.cmOptical());
+        telemetry.addData("cm", "%.2f cm", rangeSensor.getDistance(DistanceUnit.CM));
+        telemetry.addData("in", "%.2f in", rangeSensor.getDistance(DistanceUnit.INCH));
+        double feet = rangeSensor.getDistance(DistanceUnit.INCH) /12;
+        telemetry.addData("ft : ", feet);
+        telemetry.update();
     }
 
     /*

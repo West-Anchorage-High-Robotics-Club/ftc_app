@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.util.Log;
+
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -9,6 +11,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
+import static com.qualcomm.ftccommon.SoundPlayer.TAG;
 
 /**
  * Created by whs on 11/21/17.
@@ -74,6 +78,7 @@ public class HamBotRange extends OpMode {
         // Setup a variable for each drive wheel to save power level for telemetry
         double leftPower;
         double rightPower;
+        double feet;
 
         // Choose to drive using either Tank Mode, or POV Mode
         // Comment out the method that's not used.  The default below is POV.
@@ -91,13 +96,24 @@ public class HamBotRange extends OpMode {
         // rightPower = -gamepad1.right_stick_y ;
 
         // Send calculated power to wheels
-        leftDrive.setPower(leftPower);
-        rightDrive.setPower(rightPower);
+        if (gamepad1.right_trigger > 0) {
+             leftDrive.setPower(leftPower);
+             rightDrive.setPower(rightPower);
+        } else if (rangeSensor.getDistance(DistanceUnit.CM) < 28){
+             leftDrive.setPower(0);
+             rightDrive.setPower(0);
+        } else {
+             rightDrive.setPower(rightPower);
+             leftDrive.setPower(leftPower);
+        }
+
+         // Log.wtf(TAG, "loop: ", );
+
 
         if (gamepad1.a){
-            servo.setPosition(MAX_POS);
+            servo.setPosition(1);
         } else {
-            servo.setPosition(MIN_POS);
+            servo.setPosition(0);
         }
 
         // Show the elapsed game time and wheel power.
@@ -109,7 +125,7 @@ public class HamBotRange extends OpMode {
         telemetry.addData("cm optical", "%.2f cm", rangeSensor.cmOptical());
         telemetry.addData("cm", "%.2f cm", rangeSensor.getDistance(DistanceUnit.CM));
         telemetry.addData("in", "%.2f in", rangeSensor.getDistance(DistanceUnit.INCH));
-        double feet = rangeSensor.getDistance(DistanceUnit.INCH) /12;
+        feet = rangeSensor.getDistance(DistanceUnit.INCH) /12;
         telemetry.addData("ft : ", feet);
         telemetry.update();
     }

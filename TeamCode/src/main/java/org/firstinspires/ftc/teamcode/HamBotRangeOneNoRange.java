@@ -19,9 +19,9 @@ public class HamBotRangeOneNoRange extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor rightDrive = null;
     private DcMotor leftDrive = null;
-    static final double MAX_POS     =  1.0;     // Maximum rotational position
-    static final double MIN_POS     =  0.0;     // Minimum rotational position
-    Servo servo;
+    //static final double MAX_POS     =  1.0;     // Maximum rotational position
+    //static final double MIN_POS     =  0.0;     // Minimum rotational position
+    private Servo servo;
     // double  position = (MAX_POS - MIN_POS) / 2; // Start at halfway position
     //ModernRoboticsI2cRangeSensor rangeSensor;
 
@@ -73,7 +73,6 @@ public class HamBotRangeOneNoRange extends OpMode {
         // Setup a variable for each drive wheel to save power level for telemetry
         double leftPower;
         double rightPower;
-        double feet;
 
         // Choose to drive using either Tank Mode, or POV Mode
         // Comment out the method that's not used.  The default below is POV.
@@ -86,6 +85,9 @@ public class HamBotRangeOneNoRange extends OpMode {
 
         leftPower = (-Y - X);
         rightPower = (-Y + X);
+        leftDrive.setPower(leftPower);
+        rightDrive.setPower(rightPower);
+
 
         // POV Mode uses left stick to go forward, and right stick to turn.
         // - This uses basic math to combine motions and is easier to drive straight.

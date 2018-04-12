@@ -22,7 +22,7 @@ public class HamBotRangeOne extends OpMode {
     private DcMotor leftDrive = null;
     static final double MAX_POS     =  1.0;     // Maximum rotational position
     static final double MIN_POS     =  0.0;     // Minimum rotational position
-    Servo servo;
+    private Servo servo;
     // double  position = (MAX_POS - MIN_POS) / 2; // Start at halfway position
     ModernRoboticsI2cRangeSensor rangeSensor;
 

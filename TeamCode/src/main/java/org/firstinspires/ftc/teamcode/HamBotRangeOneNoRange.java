@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 
 /**
  * Created by whs on 11/21/17.
@@ -118,12 +118,33 @@ public class HamBotRangeOneNoRange extends OpMode {
         */
          // Log.wtf(TAG, "loop: ", );
 
+        float VertStick = gamepad1.right_stick_y;
 
-        if (gamepad1.a){
+        /*if (VertStick < 0) {
+            servo.setPosition(-VertStick);
+        } else {
+            servo.setPosition(0);
+        }*/
+
+        if (VertStick < 0) {
+            servo.setPosition(-VertStick);
+        } else if (gamepad1.x) {
+            servo.setPosition(0);
+        } else if (gamepad1.y) {
+            servo.setPosition(.5);
+        } else if (gamepad1.b) {
+            servo.setPosition(1);
+        } else if (gamepad1.a) {
+            servo.setPosition(1);
+            servo.setPosition(0);
+        } else {
+        }
+
+        /*if (gamepad1.a){
             servo.setPosition(1);
         } else {
             servo.setPosition(0);
-        }
+        }*/
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());

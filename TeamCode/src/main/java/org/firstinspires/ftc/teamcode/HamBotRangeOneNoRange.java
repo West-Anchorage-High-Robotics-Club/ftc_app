@@ -15,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 @TeleOp(name="Ham Bot Range One No Range", group="Ham Bot")
 public class HamBotRangeOneNoRange extends OpMode {
 
-    private float W, V, X, Y, count;
+    //private float W, V, X, Y, count;
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor rightDrive = null;
     private DcMotor leftDrive = null;
@@ -116,7 +116,7 @@ public class HamBotRangeOneNoRange extends OpMode {
             rightDrive.setPower(rightPower);
         }
         */
-         // Log.wtf(TAG, "loop: ", );
+         //random command found Log.wtf(TAG, "loop: ", );
 
         float VertStick = gamepad1.right_stick_y;
 

@@ -10,13 +10,19 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /**
  * Created by whs on 11/21/17.
  */
-@TeleOp(name="Ham Bot Range One No Range", group="Ham Bot")
-public class HamBotRangeOneNoRange extends OpMode {
+@TeleOp(name="Ham Bot Range One No Range Trigger", group="Ham Bot")
+public class HamBotRangeOneNoRangeTrigger extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor rightDrive = null;
     private DcMotor leftDrive = null;
     private Servo servo;
+    static final double INCREMENT   = 0.01;     // amount to ramp motor each CYCLE_MS cycle
+    static final double INCREMENTV2 = 0.05;     // amount to ramp motor each CYCLE_MS cycle
+    static final int    CYCLE_MS    =   50;     // period of each cycle
+    static final double MAX_FWD     =  1.0;     // Maximum FWD power applied to motor
+    static final int    STOP        =    0;
+    static final double MAX_REV     = -1.0;     // Maximum REV power applied to motor
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -63,18 +69,66 @@ public class HamBotRangeOneNoRange extends OpMode {
     @Override
     public void loop() {
         // Setup a variable for each drive wheel to save power level for telemetry
-        double leftPower;
-        double rightPower;
+        double leftPower = 0;
+        double rightPower = 0;
 
         // Choose to drive using either Tank Mode, or POV Mode
         // Comment out the method that's not used.  The default below is POV.
         float X = gamepad1.left_stick_x;
-        float Y = gamepad1.left_stick_y;
+        float LTrigger = gamepad1.left_trigger;
+        float RTrigger = gamepad1.right_trigger;
+/*
+        if (gamepad1.right_trigger > 0) {
+            leftPower = (-RTrigger - X);
+            rightPower = (-RTrigger + X);
+            leftDrive.setPower(leftPower);
+            rightDrive.setPower(rightPower);
+        } else {
+            leftPower = -X;
+            rightPower = X;
+            leftDrive.setPower(leftPower);
+            rightDrive.setPower(rightPower);
+        }
+        */
 
-        leftPower = (-Y - X);
-        rightPower = (-Y + X);
-        leftDrive.setPower(leftPower);
-        rightDrive.setPower(rightPower);
+        // Define class members
+        double  power   = 0;
+  /*      if (LTrigger > 0 && RTrigger > 0) {
+            // Keep stepping up until we hit the max value.
+            power -= INCREMENT;
+            if (power <= STOP){
+                leftDrive.setPower(STOP);
+                rightDrive.setPower(STOP);
+            } else {
+                leftDrive.setPower(-power);
+                rightDrive.setPower(power);
+            }
+        } else*/
+            if(RTrigger > 0) {
+                power += INCREMENT ;
+                if (power >= MAX_FWD) {
+                    leftDrive.setPower(-MAX_FWD);
+                    rightDrive.setPower(MAX_FWD);
+                    power -= INCREMENT;
+                } else {
+                    leftDrive.setPower(-power);
+                    rightDrive.setPower(power);
+                }
+            } else if (LTrigger >0){
+                power -= INCREMENTV2;
+                leftDrive.setPower(-power);
+                rightDrive.setPower(power);
+            } else {
+                power -= INCREMENT;
+                if (power <= STOP) {
+                    leftDrive.setPower(STOP);
+                    rightDrive.setPower(STOP);
+                    power += INCREMENT;
+                } else {
+                    leftDrive.setPower(-power);
+                    rightDrive.setPower(power);
+                }
+            }
 
 
         // POV Mode uses left stick to go forward, and right stick to turn.
@@ -98,7 +152,7 @@ public class HamBotRangeOneNoRange extends OpMode {
         */
          //random command found Log.wtf(TAG, "loop: ", );
 
-        float VertStick = gamepad1.right_stick_y;
+        double VertStick = gamepad1.right_stick_y;
 
         if (VertStick < 0) {
             servo.setPosition(-VertStick);

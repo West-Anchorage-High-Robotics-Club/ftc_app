@@ -17,8 +17,8 @@ public class HamBotRangeOneNoRangeTrigger extends OpMode {
     private DcMotor rightDrive = null;
     private DcMotor leftDrive = null;
     private Servo servo;
-    static final double INCREMENT   = 0.01;     // amount to ramp motor each CYCLE_MS cycle
-    static final double INCREMENTV2 = 0.05;     // amount to ramp motor each CYCLE_MS cycle
+    static final double INCREMENT   = 0.06;     // amount to ramp motor each CYCLE_MS cycle
+    static final double INCREMENTV2 = 0.1;     // amount to ramp motor each CYCLE_MS cycle
     static final int    CYCLE_MS    =   50;     // period of each cycle
     static final double MAX_FWD     =  1.0;     // Maximum FWD power applied to motor
     static final int    STOP        =    0;
@@ -107,25 +107,21 @@ public class HamBotRangeOneNoRangeTrigger extends OpMode {
             if(RTrigger > 0) {
                 power += INCREMENT ;
                 if (power >= MAX_FWD) {
-                    leftDrive.setPower(-MAX_FWD);
+                    leftDrive.setPower(MAX_FWD);
                     rightDrive.setPower(MAX_FWD);
                     power -= INCREMENT;
                 } else {
-                    leftDrive.setPower(-power);
+                    leftDrive.setPower(power);
                     rightDrive.setPower(power);
                 }
             } else if (LTrigger >0){
                 power -= INCREMENTV2;
-                leftDrive.setPower(-power);
-                rightDrive.setPower(power);
-            } else {
-                power -= INCREMENT;
                 if (power <= STOP) {
                     leftDrive.setPower(STOP);
                     rightDrive.setPower(STOP);
                     power += INCREMENT;
                 } else {
-                    leftDrive.setPower(-power);
+                    leftDrive.setPower(power);
                     rightDrive.setPower(power);
                 }
             }
